@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "CSS Animation Builder"
+version = "1.0.0"
+id = "artifacts/css-animation-builder"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21979
+
+[services.development]
+run = "pnpm --filter @workspace/css-animation-builder run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/css-animation-builder", "run", "build" ]
+publicDir = "artifacts/css-animation-builder/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21979"
+BASE_PATH = "/"
